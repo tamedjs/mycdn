@@ -1,0 +1,21 @@
+{
+  "name": "@tamedjs/mycdn",
+  "version": "0.1.0",
+  "description": "A local development server to work on static files, REST endpoints, reverse proxy, and caching proxied responses.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "The TRG, LLC",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "fs-extra": "^9.0.1",
+    "json5": "^2.1.3",
+    "redbird": "^0.10.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "sirloin": "^0.17.3"
+  }
+}
