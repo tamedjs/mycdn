@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Loading...</title>
+  <!-- <link href="http://dev.pokedex.com/static/css/normalize.min.css" rel="stylesheet" type="text/css" />
+  <link href="http://dev.pokedex.com/static/css/common.css" rel="stylesheet" type="text/css" /> -->
+</head>
+<body>
+  <div id="host-main-app-container"></div>
+  <div id="host-pre-mount-area"></div>
+
+  <script src="./index.js"></script>
+
+  <div id="__init-loader" class="">
+    <div class="main-loader"></div>
+    <style>
+      #host-pre-mount-area {
+        display: none !important;
+        /* border: 10px solid #64e400;
+        height: 100px; */
+        /* width: 500px; */
+      }
+
+      /* ref: https://projects.lukehaas.me/css-loaders/ */
+      html {
+        height: 100vh;
+      }
+
+      html,
+      body,
+      #__init-loader,
+      #host-main-app-container,
+      #host-main-app-container>* {
+        /* border: 10px solid blue; */
+        align-items: stretch;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 2;
+        font-family: Arial, Helvetica, sans-serif;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      #__init-loader {
+        /* border: 10px solid green; */
+        background-color: #fff;
+        bottom: 0;
+        left: 0;
+        text-align: center;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 100000;
+      }
+
+      #__init-loader.done {
+        /* display: none; */
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s 0.3s, opacity 0.3s linear;
+      }
+
+      #__init-loader>.main-loader,
+      #__init-loader>.main-loader:after {
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+      }
+
+      #__init-loader>.main-loader {
+        color: red;
+        margin: 60px auto;
+        font-size: 10px;
+        position: relative;
+        text-indent: -9999em;
+        border-top: 8px solid rgba(0, 0, 0, 0.06);
+        border-right: 8px solid rgba(0, 0, 0, 0.06);
+        border-bottom: 8px solid rgba(0, 0, 0, 0.06);
+        border-left: 8px solid #d4d4d4;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation: __animInitLoader 1.1s infinite linear;
+        animation: __animInitLoader 1.1s infinite linear;
+      }
+
+      @-webkit-keyframes __animInitLoader {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes __animInitLoader {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+{
+  "name": "@tamedjs/mycdn",
+  "version": "0.1.0",
+  "description": "A local development server to work on static files, REST endpoints, reverse proxy, and caching proxied responses.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "The TRG, LLC",
+  "license": "MIT",
+  "config": {
+    "port": 5000
+  },
+  "staticFiles": {
+    "staticPath": "public",
+    "watcherGlob": "**"
+  },
+  "scripts": {
+    "app": "",
+    "app:build": "npx parcel build ./src/js/browser/index.html --no-cache ",
+    "app:server": "node src/js/server/index.js",
+    "app:watch": "npx parcel watch ./src/js/browser/index.html --no-cache ",
+    "start": "npm run app",
+    "test": "jest",
+    "test:watch": "jest --watch --coverage"
+  },
+  "dependencies": {
+    "deepmerge": "^4.2.2",
+    "fs-extra": "^9.0.1",
+    "json5": "^2.1.3",
+    "kill-port": "^1.6.1",
+    "node-fetch": "^2.6.1",
+    "redbird": "^0.10.0"
+  },
+  "devDependencies": {
+    "jest": "^26.5.3",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.5.0",
+    "sirloin": "^0.17.3"
+  }
+}

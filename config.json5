@@ -1,0 +1,30 @@
+{
+  // Information about the app.
+  title: 'Pokedex Host App and Local Proxy Tools',
+  org: 'ronbravo',
+  name: 'pokemon',
+  port: 5000,
+
+  // Contains the settings for local dev proxies
+  // This uses the redbird package: https://www.npmjs.com/package/@jchip/redbird
+  proxy: {
+    port: 80,
+    log: 50,
+    domains: {
+      'dev.chalet.com': 'http://localhost:2000',
+      'dev.mycdn.com': 'http://localhost:5000',
+      
+      'dev.pokedex.com': 'http://localhost:5000',
+      'dev.cdn.pokedex.com': 'http://localhost:5001',
+      'dev.pokedex.vue2.pokedex.com': 'http://localhost:5001',
+      'dev.my-account.vue2.pokedex.com': 'http://localhost:5002',
+
+      // 'dev.main.ang8.pokedex.com': 'http://localhost:5001',
+      // 'dev.catalog.ang8.pokedex.com': 'http://localhost:5002',
+      // 'dev.catalog.vue2.pokedex.com': 'http://localhost:5002',
+      // 'dev.catalog.react16.pokedex.com': 'http://localhost:5003',
+      // 'dev.catalog.nuxt2.pokedex.com': 'http://localhost:5004',
+      // 'dev.catalog.next9.pokedex.com': 'http://localhost:5005',
+    }
+  }
+}
