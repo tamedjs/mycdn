@@ -30,6 +30,7 @@
     "http-proxy": "^1.18.1",
     "json5": "^2.1.3",
     "kill-port": "^1.6.1",
+    "live-server": "^1.2.1",
     "node-fetch": "^2.6.1",
     "pem": "^1.14.4",
     "redbird": "^0.10.0",
