@@ -47,8 +47,9 @@ export class Cache {
   }
 
   static async load (req, res) {
-    let id;
+    let id, result;
 
+    result = {};
     id = registry [req.params.url];
     if (id) {
       try {
@@ -59,16 +60,19 @@ export class Cache {
         console.error (`ERROR: Unable to read cached request - ${path}`);
         console.error (err);
       }
-      return { success: true }
+      result.success = true;
+      result.content = content;
     }
     else {
-      console.log (`- NOT in Cache: ${req.params.url} ${req.params.url}`)
-      return { success: true }
+      console.log (`- NOT in Cache: ${req.params.url}`)
+      result.success = true;
     }
+
+    return result;
   }
 
   static async loadFile ({ name }) {
-    let path;
+    let data, path;
 
     if (name) {
       path = resolve (Cache.getBasePath (), `${name}.json`);
@@ -77,7 +81,12 @@ export class Cache {
           console.error (`ERROR: Unable to load the "${path}" ${name} file.`)
           return error;
         }
-        registry = JSON.parse (content.toString ());
+
+        data = JSON.parse (content.toString ());
+        switch (name) {
+          case 'history': history = data; break;
+          case 'registry': registry = data; break;
+        }
       });
     }
   }
@@ -89,8 +98,9 @@ export class Cache {
   }
 
   static async save (req, res) {
-    let id, path;
+    let id, path, result;
 
+    result = {};
     id = registry [req.params.url];
     if (id === undefined) {
       id = nanoid ();
@@ -99,23 +109,31 @@ export class Cache {
       try {
         console.log ('- Saving:', path);
         registry [req.params.url] = id;
-        history.push ({ id, method: req.params.method, url: req.params.url });
 
         await fs.ensureFile (path);
         await fs.writeFile (path, JSON.stringify (req.params, null, 2));
       }
       catch (err) {
+        result.success = false;
+        return result;
       }
+      result.status = { saved: true }
+    }
+    else {
+      result.success = true;
+      result.status = { saved: false }
     }
 
-    return { success: true }
+    history.unshift ({ id, time: new Date().toLocaleString(), method: req.params.method, url: req.params.url });
+    Cache.saveFile ({ data: history, name: 'history' });
+    
+    return result;
   }
 
   static async saveFile ({ data, name }) {
     let path;
 
     if (data && name) {
-      registry = {};
       path = resolve (Cache.getBasePath (), `${name}.json`);
       await fs.ensureFile (path);
       await fs.writeFile (path, JSON.stringify (data, null, 2));
