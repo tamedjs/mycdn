@@ -2,7 +2,6 @@
   "name": "@tamedjs/mycdn",
   "version": "0.1.0",
   "description": "A local development server to work on static files, REST endpoints, reverse proxy, and caching proxied responses.",
-  "main": "index.js",
   "keywords": [],
   "author": "The TRG, LLC",
   "license": "MIT",
@@ -14,32 +13,30 @@
     "watcherGlob": "**"
   },
   "scripts": {
-    "app": "",
-    "app:build": "npx parcel build ./src/js/browser/index.html --no-cache ",
-    "app:server": "node src/js/server/index.js",
-    "app:server:watch": "nodemon --exec \"reset; yarn run app:server\" --watch ./src/js/server",
-    "app:sign:watch": "npx nodemon --exec \"node ./src/js/server/sign.js\" --watch ./src/js/server",
-    "app:watch": "npx parcel watch ./src/js/browser/index.html --no-cache ",
-    "start": "npm run app",
-    "test": "jest",
-    "test:watch": "jest --watch --coverage"
+    "api": "npx nodemon --exec \"node dist/server/api.js\" --watch dist/server/api.js ",
+    "api:dev": "npx microbundle watch --entry src/js/server/api/start.js --output dist/server/api.js --format cjs",
+    "app": "node src/js/server/index.js",
+    "app:dev": "npx parcel watch ./src/js/browser/index.html --no-cache ",
+    "proxy": "npx nodemon --exec \"node dist/server/proxy.js\" --watch dist/server/proxy.js ",
+    "proxy:build": "npx microbundle build --entry src/js/server/proxy.js --output dist/server/proxy.js",
+    "proxy:dev": "npx microbundle watch --entry src/js/server/proxy/start.js --output dist/server/proxy.js --format cjs"
   },
   "dependencies": {
     "deepmerge": "^4.2.2",
     "fs-extra": "^9.0.1",
-    "http-proxy": "^1.18.1",
     "json5": "^2.1.3",
     "kill-port": "^1.6.1",
-    "node-fetch": "^2.6.1",
-    "pem": "^1.14.4",
+    "live-server": "^1.2.1",
+    "nanoid": "^3.1.20",
+    "nodemon": "^2.0.6",
     "redbird": "^0.10.0",
-    "selfsigned": "^1.10.8"
+    "sirloin": "^0.18.1",
+    "voca": "^1.4.0"
   },
   "devDependencies": {
-    "jest": "^26.5.3",
-    "nodemon": "^2.0.5",
+    "@babel/core": "^7.12.9",
+    "microbundle": "^0.12.4",
     "parcel-bundler": "^1.12.4",
-    "parcel-plugin-static-files-copy": "^2.5.0",
-    "sirloin": "^0.17.3"
+    "parcel-plugin-static-files-copy": "^2.5.0"
   }
 }
