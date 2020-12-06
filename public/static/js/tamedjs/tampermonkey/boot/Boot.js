@@ -38,7 +38,7 @@
     }
 
     static start () {
-      let base, config, url;
+      let base, config, dom;
 
       console.log ('- MyCDN: Booting up the tools...');
       config = window ['localStorage'].getItem ('mycdn.config');
@@ -55,11 +55,17 @@
         }
       }
 
+      // Load the custom script.
+      dom = document.createElement ('link');
+      dom.href = `${Boot.buildUrl ({ config, path: '/static/css/common.css' })}`;
+      dom.rel = 'stylesheet';
+      dom.type = 'text/css';
+      document.head.appendChild (dom);
+
       // Load the initialization script.
       mainConfig = config;
       base = Boot.buildUrl ({ config });
-      url = Boot.buildUrl ({ config, path: config.init }) + `?_mycdn_set_base=${base}`;
-      Boot.loadScript ({ url });
+      Boot.loadScript ({ url: Boot.buildUrl ({ config, path: config.init }) + `?_mycdn_set_base=${base}` });
     }
   }
 
