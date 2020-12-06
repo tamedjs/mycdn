@@ -18,21 +18,6 @@ export class Cache {
     return { success: true };
   }
 
-  static formatFileName ({ location }) {
-    let home, name, path, result;
-
-    if (location) {
-      result = url.parse (location);
-      home = os.homedir ();
-      name = 'bob';
-
-      path = voca.slugify (`${result.protocol}-${result.host}-${result.pathname}`) + '.json';
-      path = resolve (home, 'workspace', 'cache', 'session', name, 'request', path);
-    }
-
-    return path;
-  }
-
   static getBasePath (args = {}) {
     let { extra = [] } = args;
     let name, path;
@@ -47,24 +32,27 @@ export class Cache {
   }
 
   static async load (req, res) {
-    let id, result;
+    let data, id, result;
 
     result = {};
     id = registry [req.params.url];
     if (id) {
       try {
         path = Cache.getBasePath ({ extra: ['request', `${id}.json`], location: req.params.url });
-        content = JSON.parse (await fs.readFile (path));
+        data = JSON.parse (await fs.readFile (path));
       }
       catch (err) {
         console.error (`ERROR: Unable to read cached request - ${path}`);
         console.error (err);
       }
       result.success = true;
-      result.content = content;
+      result.content = data.response;
+
+      history.push ({ id, time: new Date().toLocaleString(), method: req.params.method, url: req.params.url });
+      Cache.saveFile ({ data: history, name: 'history' });
     }
     else {
-      console.log (`- NOT in Cache: ${req.params.url}`)
+      console.log (`- NOT in Cache ${Date.now ()}: ${req.params.url}`)
       result.success = true;
     }
 
@@ -98,17 +86,18 @@ export class Cache {
   }
 
   static async save (req, res) {
-    let id, path, result;
+    let fullUrl, id, path, result;
 
     result = {};
-    id = registry [req.params.url];
+    fullUrl = req.params.request.url;
+    id = registry [fullUrl];
     if (id === undefined) {
       id = nanoid ();
-      path = Cache.getBasePath ({ extra: ['request', `${id}.json`], location: req.params.url });
+      path = Cache.getBasePath ({ extra: ['request', `${id}.json`], location: fullUrl });
 
       try {
         console.log ('- Saving:', path);
-        registry [req.params.url] = id;
+        registry [fullUrl] = id;
 
         await fs.ensureFile (path);
         await fs.writeFile (path, JSON.stringify (req.params, null, 2));
@@ -124,9 +113,6 @@ export class Cache {
       result.status = { saved: false }
     }
 
-    history.unshift ({ id, time: new Date().toLocaleString(), method: req.params.method, url: req.params.url });
-    Cache.saveFile ({ data: history, name: 'history' });
-    
     return result;
   }
 

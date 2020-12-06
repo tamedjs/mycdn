@@ -17,6 +17,7 @@
     "api:dev": "npx microbundle watch --entry src/js/server/api/start.js --output dist/server/api.js --format cjs",
     "app": "node src/js/server/index.js",
     "app:dev": "npx parcel watch ./src/js/browser/index.html --no-cache ",
+    "lib:qiankun": "npx microbundle build --entry src/js/bundle/browser/qiankun/qiankun/src/index.js --output dist/bundle/browser/qiankun/index.js --format umd --target web",
     "proxy": "npx nodemon --exec \"node dist/server/proxy.js\" --watch dist/server/proxy.js ",
     "proxy:build": "npx microbundle build --entry src/js/server/proxy.js --output dist/server/proxy.js",
     "proxy:dev": "npx microbundle watch --entry src/js/server/proxy/start.js --output dist/server/proxy.js --format cjs"
@@ -29,6 +30,7 @@
     "live-server": "^1.2.1",
     "nanoid": "^3.1.20",
     "nodemon": "^2.0.6",
+    "qiankun": "^2.3.2",
     "redbird": "^0.10.0",
     "sirloin": "^0.18.1",
     "voca": "^1.4.0"
