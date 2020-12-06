@@ -12,7 +12,7 @@
 # !build/public/font/
 
 /security/certificate
-public
+# public
 coverage
 .nyc_output
 db.json
