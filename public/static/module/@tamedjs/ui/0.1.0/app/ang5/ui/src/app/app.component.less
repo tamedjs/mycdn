@@ -1,0 +1,32 @@
+@border-color: #e5e5e5;
+
+.app-ui-page {
+  // border: 5px solid red;
+  bottom: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.app-ui-header {
+  > .uk-navbar-container {
+    border-bottom: 1px solid @border-color;
+  }
+}
+.app-ui-body {
+  // border: 5px solid green;
+  display: flex;
+  flex-grow: 2;
+}
+.app-ui-sidebar {
+  // border: 5px solid blue;
+  border-right: 1px solid @border-color;
+  min-width: 320px;
+}
+.app-ui-content {
+  // border: 5px solid red;
+  flex-grow: 2;
+}

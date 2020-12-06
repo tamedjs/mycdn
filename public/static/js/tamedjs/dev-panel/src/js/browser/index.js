@@ -4,9 +4,7 @@ import '~/module/uikit/3.5.10/uikit-icons.min.js';
 
 (function () {
   let dom;
-
-  console.log ('fasdf;asjdf;ksdjfl;jkasdfjksd;j');
-
+  
   // Load the qiankun framework.
   dom = document.createElement ('script');
   dom.src = '~/module/qiankun/2.3.2/qiankun.js';

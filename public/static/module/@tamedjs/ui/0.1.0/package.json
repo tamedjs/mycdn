@@ -1,0 +1,15 @@
+{
+  "name": "@tamedjs/ui",
+  "version": "0.1.0",
+  "description": "The generic TamedJs Ui Design System.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "The TRG, LLC",
+  "license": "MIT",
+  "devDependencies": {
+    "microbundle": "^0.12.4"
+  }
+}
